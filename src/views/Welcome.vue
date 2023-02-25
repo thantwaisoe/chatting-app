@@ -5,8 +5,11 @@
 </template>
 
 <script>
+import { db } from '../firebase/config';
 export default {
-
+setup(){
+    console.log(db)
+}
 }
 </script>
 

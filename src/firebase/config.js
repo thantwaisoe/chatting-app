@@ -1,5 +1,5 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
+import { initializeApp } from 'firebase/app'
+import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 
 const firebaseConfig = {
     apiKey: "AIzaSyA7O749z5qrTliyAQaP1AMMe4RD2vA3saU",
@@ -11,9 +11,8 @@ const firebaseConfig = {
     measurementId: "G-75CMWKKHZT"
   };
 
-  firebase.initializeApp(firebaseConfig)
+const app = initializeApp(firebaseConfig)
 
-  let db = firebase.firestore()
-  let timestamp = firebase.firestore.FieldValue.serverTimestamp
+  let db = getFirestore(app)
 
-  export {db, timestamp}
+  export {db}
