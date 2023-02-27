@@ -1,6 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { updateDoc, serverTimestamp } from 'firebase/firestore';
 import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
    apiKey: 'AIzaSyA7O749z5qrTliyAQaP1AMMe4RD2vA3saU',
@@ -15,5 +16,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 let timestamp =  serverTimestamp()
 let db = getFirestore(app);
+const auth = getAuth()
 
-export { db, timestamp };
+export { db, timestamp, auth };
