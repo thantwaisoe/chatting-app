@@ -1,7 +1,7 @@
 import { ref } from 'vue';
 import {auth,createUserWithEmailAndPassword,updateProfile} from '../firebase/config'
- let error = ref(null)
 
+let error = ref(null)
 const createAccount = async(email, password, displayName) => {
     try {
         const res = await createUserWithEmailAndPassword(auth,email, password)
