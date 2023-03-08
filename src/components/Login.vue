@@ -1,34 +1,35 @@
 <template>
-    <h1>Login</h1>
-    <form v-on:submit.prevent="Login">
-      <input type="email"  placeholder="Enter Email" v-model="email">
-      <input type="password"  placeholder="Enter Password" v-model="password">
-      <button>Login</button>
- 
-    </form>
-  </template>
+  <h1>Login</h1>
+  <form v-on:submit.prevent="LoginUser">
+    <input type="email" placeholder="Enter Email" v-model="email">
+    <input type="password" placeholder="Enter Password" v-model="password">
+    <div v-if="error">{{ error }}</div>
+    <button>Login</button>
+
+  </form>
+</template>
   
-  <script>
-  import { ref } from 'vue'
-  export default {
-  setup(){
+<script>
+import { ref } from 'vue'
+import {login, error} from '../service/login'
+export default {
+  setup() {
     let email = ref('')
     let password = ref('')
-  
-    let Login = () => {
-      console.log(email.value)
-      console.log(password.value)
+
+    let LoginUser = async () => {
+      let res = await login(email.value, password.value)
+      console.log(res)
     }
-  
+
     return {
       email,
       password,
-      Login
+      LoginUser,
+      error
     }
   }
-  }
-  </script>
+}
+</script>
   
-  <style>
-  
-  </style>
+<style></style>
