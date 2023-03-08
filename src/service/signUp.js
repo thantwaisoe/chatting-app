@@ -9,7 +9,7 @@ const createAccount = async(email, password, displayName) => {
         await updateProfile(auth.currentUser,{displayName})
         return res
       } catch (err) {
-        error.value = err.message 
+        error.value = err.code 
       }
 };
 

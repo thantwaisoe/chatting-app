@@ -3,7 +3,7 @@
   <form v-on:submit.prevent="LoginUser">
     <input type="email" placeholder="Enter Email" v-model="email">
     <input type="password" placeholder="Enter Password" v-model="password">
-    <div v-if="error">{{ error }}</div>
+    <div class="error" v-if="error">{{ error }}</div>
     <button>Login</button>
 
   </form>
@@ -19,7 +19,9 @@ export default {
 
     let LoginUser = async () => {
       let res = await login(email.value, password.value)
+     if(res){
       console.log(res)
+     }
     }
 
     return {
