@@ -14,7 +14,7 @@
 import { ref } from 'vue'
 import {createAccount, error} from '../service/signUp'
 export default {
-setup(){
+setup(props, context){
   let username = ref('')
   let email = ref('')
   let password = ref('')
@@ -23,7 +23,7 @@ setup(){
   let signUp = async() => {
    let res =  await createAccount(email.value, password.value, username.value)
   if(res) {
-    console.log(res.user)
+    context.emit('enterChatRoom')
   }
   }
 

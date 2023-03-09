@@ -13,14 +13,14 @@
 import { ref } from 'vue'
 import {login, error} from '../service/login'
 export default {
-  setup() {
+  setup(props, context) {
     let email = ref('')
     let password = ref('')
 
     let LoginUser = async () => {
       let res = await login(email.value, password.value)
      if(res){
-      console.log(res)
+      context.emit('enterChatRoom')
      }
     }
 

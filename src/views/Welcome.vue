@@ -1,12 +1,12 @@
 <template>
   <div class="welcome container">
     <div v-if="isShowLoginForm">
-      <SingUp></SingUp>
+      <SingUp @enterChatRoom="enterChatRoom"></SingUp>
       
       <p>Already crated? <span @click="isShowLoginForm=!isShowLoginForm">Go to login</span></p>
     </div>
     <div v-else>
-      <Login></Login>
+      <Login @enterChatRoom="enterChatRoom"></Login>
       <p>not a member? <span @click="isShowLoginForm=!isShowLoginForm">create account?</span></p>
     </div>
   </div>
@@ -14,6 +14,7 @@
 
 <script>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import Login from '../components/Login'
 import SingUp from '../components/SingUp'
 export default {
@@ -22,9 +23,13 @@ export default {
   },
   setup(){
     let isShowLoginForm = ref(true)
-
+    const router = useRouter()
+    let enterChatRoom = () =>{
+      router.push('/chatroom')
+    }
     return {
-      isShowLoginForm
+      isShowLoginForm,
+      enterChatRoom
     }
   }
 
