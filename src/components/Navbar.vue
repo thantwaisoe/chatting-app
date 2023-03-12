@@ -1,8 +1,8 @@
 <template>
-    <nav>
+    <nav v-if="user">
         <div>
-            <p>Hi Display Name</p>
-            <p class="email">Login as Email</p>
+            <p>Hi {{ user.displayName }}</p>
+            <p class="email">Login as {{ user.email }}</p>
         </div>
         <button @click="logout">Logout</button>
     </nav>
@@ -10,21 +10,19 @@
 
 <script>
 import { ref } from 'vue'
-import {auth, signOut} from '../firebase/config'
+import { userLogout } from '../service/logout.js'
+import getUser from '../service/getUser.js'
 export default {
     setup() {
-        let error = ref(null)
+        // TODO: MAKE REFACTORING WITH COMPOSABLE
+        const { user } = getUser()
         const logout = async () => {
-            try {
-                await signOut(auth)
-                console.log('Log out success')
-            } catch (err) {
-                error.value = err.code
-                console.log(err.code)
-            }
+            await userLogout()
         }
-        return{
-            logout
+
+        return {
+            logout,
+            user
         }
     }
 }
