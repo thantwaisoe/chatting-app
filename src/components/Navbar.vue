@@ -9,12 +9,10 @@
 </template>
 
 <script>
-import { ref } from 'vue'
 import { userLogout } from '../service/logout.js'
 import getUser from '../service/getUser.js'
 export default {
     setup() {
-        // TODO: MAKE REFACTORING WITH COMPOSABLE
         const { user } = getUser()
         const logout = async () => {
             await userLogout()
