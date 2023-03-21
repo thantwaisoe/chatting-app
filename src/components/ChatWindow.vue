@@ -1,23 +1,37 @@
 <template>
   <div class="chat-window">
-    <div class="messages">
+    <div class="messages" v-for="message in allMessaegs" :key="message.id">
         <div class="single">
-            <span class="created-at"> 3 min ago</span>
-            <span class="name">OO</span>
-            <span class="message">Hello Test Messages</span>
-        </div>
-        <div class="single">
-            <span class="created-at"> 3 min ago</span>
-            <span class="name">OO</span>
-            <span class="message">Hello Test Messages</span>
+            <span class="created-at"> {{ message.created_at }}</span>
+            <span class="name">{{message.senderName}}</span>
+            <span class="message">{{ message.message }}</span>
         </div>
     </div>
   </div>
 </template>
 
 <script>
+import { collection, onSnapshot, orderBy, query } from '@firebase/firestore';
+import { db } from '@/firebase/config';
+import { ref } from 'vue';
 export default {
+    setup(){
+        let allMessaegs = ref([])
+       const dbRef =  collection(db, 'messages')
+       const q = query(dbRef, orderBy('created_at'))
+       onSnapshot(q, data => {
+        let result = []
+          data.docs.forEach(eachRow => {
+            let document = {...eachRow.data(), id: eachRow.id}
+            result.push(document)
+          })
+          allMessaegs.value = result
+       })
 
+       return {
+        allMessaegs
+       }
+    }
 }
 </script>
 
@@ -37,6 +51,7 @@ export default {
       }
       .name {
         font-weight: bold;
+        font-size: 20px;
         margin-right: 6px;
       }
       .messages {
