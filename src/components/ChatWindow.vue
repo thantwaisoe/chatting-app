@@ -2,7 +2,7 @@
   <div class="chat-window">
     <div class="messages" v-for="message in allMessaegs" :key="message.id">
         <div class="single">
-            <span class="created-at"> {{ message.created_at }}</span>
+            <span class="created-at"> {{message.created_at ?  message.created_at.toDate() : 'fetching'}}</span>
             <span class="name">{{message.senderName}}</span>
             <span class="message">{{ message.message }}</span>
         </div>
