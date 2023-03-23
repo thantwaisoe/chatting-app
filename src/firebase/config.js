@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
-import { updateDoc, serverTimestamp } from 'firebase/firestore';
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import { updateDoc, serverTimestamp,addDoc, collection, getFirestore } from 'firebase/firestore';
+import { getDocs } from 'firebase/firestore/lite';
 import {
    getAuth,
    createUserWithEmailAndPassword,
@@ -27,6 +27,8 @@ const auth = getAuth();
 
 export {
    db,
+   collection,
+   addDoc,
    timestamp,
    auth,
    createUserWithEmailAndPassword,
